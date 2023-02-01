@@ -143,6 +143,18 @@ public class CalculadoraEstadisticas
 		return resultado;
 	}
 
+	public List<Map<String, Object>> paisPorAtleta(String nombrePais)
+	{
+		List<Map<String, Object>> resultado = null;
+		Pais elPais = atleta.darNombre(nombrePais);
+		if (elPais != null)
+		{
+			resultado = new ArrayList<Map<String, Object>>();
+			resultado = elPais.consultarAtletas();
+		}
+		return resultado;
+	}
+	
 	/**
 	 * Calcula cuál es el país con más medallistas en los juegos olímpicos. Si hay
 	 * más de un país con la mayor cantidad de medallistas, los encuentra a todos.
