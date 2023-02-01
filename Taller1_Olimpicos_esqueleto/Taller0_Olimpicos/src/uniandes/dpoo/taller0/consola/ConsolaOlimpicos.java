@@ -62,7 +62,9 @@ public class ConsolaOlimpicos
 					ejecutarMedallistasPorNacionYGenero();
 				else if (opcion_seleccionada == 12 && calculadora != null)
 					ejecutarPorcentajeMedallistas();
-				else if (opcion_seleccionada == 13)
+				else if (opcion_seleccionada == 13 && calculadora != null)
+					ejecutarNombrePaisAtleta();
+				else if (opcion_seleccionada == 14)
 				{
 					System.out.println("Saliendo de la aplicación ...");
 					continuar = false;
@@ -102,7 +104,8 @@ public class ConsolaOlimpicos
 		System.out.println("10. Consultar el atleta todoterreno");
 		System.out.println("11. Consultar los medallistas por país y género");
 		System.out.println("12. Consultar el porcentaje de atletas que son medallistas");
-		System.out.println("13. Salir de la aplicación\n");
+		System.out.println("13. Consultar el país al cual representa el atleta");
+		System.out.println("14. Salir de la aplicación\n");
 	}
 
 	/**
@@ -116,7 +119,28 @@ public class ConsolaOlimpicos
 		double redondeado = (double) ((int) (porcentaje * 100.0)) / 100.0;
 		System.out.println("El porcentaje de atletas que son medallistas es el " + redondeado + "%");
 	}
+	private void ejecutarNombrePaisAtleta()
+	{
+		System.out.println("\n" + "Pais al cual representa un atleta" + "\n");
+		
+		String atleta = input("Por favor ingrese el nombre de un atleta");
 
+		List<Map<String, Object>> atletas = calculadora.atletasPorPais(atleta);
+		if (atletas == null)
+		{
+			System.out.println("No existe un atleta con ese nombre");
+		}
+		else
+		{
+			for (Map<String, Object> datos : atletas)
+			{
+				String nombre = (String) datos.get("nombre");
+				String evento = (String) datos.get("evento");
+				int anio = (int) datos.get("anio");
+				System.out.println(" - " + evento + " en " + anio + " --> " + nombre);
+		System.out.println("El nombre del pais al cual representa el atleta es" + redondeado + "%");
+	}
+	
 	/**
 	 * Le pide el usuario el nombre de un país y un género, y luego le muestra la
 	 * información de los medallistas de ese género que han representado a ese país.
